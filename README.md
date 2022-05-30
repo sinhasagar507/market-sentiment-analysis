@@ -34,6 +34,7 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    - Used Streamlit for building the UI and utlized ngrok for serving the model
 
 #### Visualization
-     ![Yes Bank](https://user-images.githubusercontent.com/54955979/171031118-0da6c802-21d9-473c-9fe5-8a35c83f56eb.png)
+     ![Yes Bank](https://user-images.githubusercontent.com/54955979/171034466-7567aa51-2e28-4fd7-8b7a-1ead657e7e0f.png)
+)
 
     
