@@ -17,3 +17,5 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 
 ## Workflow
 1. **Data Preprocessing and Feature Extraction**
+   - Word Tokenization and Lemmatization 
+   - 
