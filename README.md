@@ -16,7 +16,7 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 3. **Description** - A small description about the news article 
 
 ## Workflow
-1. **Exploratory Data Analysis(EDA)**
+1. ####**Exploratory Data Analysis(EDA)**
    - Word Tokenization and Lemmatization 
    - Part Of Speech(POS) Tag Extraction 
    - Adding meta features in the form of number of words and punctuations 
@@ -25,15 +25,15 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    - Caculated PMI of these tags with respect to the keywords(or phrases) and overall sematic orientation(SO) to the sentence 
    - 
   
-2. **Classification**
+2. ####**Classification**
    - Applied Multinomial Naive Byes, Random Forest, ANN and LSTMs for predicting sentiments 
    - Achieved best Macro-F1 score of 0.76 and a recall score of 0.81 
 
-3. **Deployment**
+3. ####**Deployment**
    - Tried deploying the model using Streamlit and ngrok. 
    - Used Streamlit for building the UI and utlized ngrok for serving the model
 
-4. **Visualization**
+4. ####**Visualization**
      <img src="https://user-images.githubusercontent.com/54955979/171031118-0da6c802-21d9-473c-9fe5-8a35c83f56eb.png"
 width="400"> <img src="https://user-images.githubusercontent.com/54955979/171031166-344df5b8-b2ba-4627-8c42-76ec008e24f9.png" width="400">
      <img src="https://user-images.githubusercontent.com/54955979/171031827-77ff18ab-6555-4d1a-bfb3-d3c26ac5e645.png"
