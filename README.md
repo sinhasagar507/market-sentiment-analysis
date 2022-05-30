@@ -23,8 +23,7 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    - Extracted phrases based on POS tagset features
    - Searched for most relevant positive and negative keyword(s) based on occurences or its distribution in the dataset
    - Caculated PMI of these tags with respect to the keywords(or phrases) and overall sematic orientation(SO) to the sentence 
-   - 
-  
+ 
 #### Classification
    - Applied Multinomial Naive Byes, Random Forest, ANN and LSTMs for predicting sentiments 
    - Achieved best Macro-F1 score of 0.76 and a recall score of 0.81 
