@@ -1,8 +1,8 @@
 ## Analyzing-Financial-News-Headlines
 Sentiment Classification using Keyword-based approach and Point of Mutual Information(PMI)
-* Unsupervised Classification using Turney's algorithm by extracting Parts-of-Speech (POS) Tags
-* Horizontal Feature-Vector stacking of text-based and numerical features
-* Machine Learning with hyperparameter tuning and metric evaluation
+* Unsupervised Classification using Turney's algorithm through Point of Mutual Information(PMI) and keyword extraction to generate training labels 
+* Handling Imbalanced Dataset using Synthetic Minority Oversampling Technique(SMOTE)
+* Machine Learning Techniques for Classification on Validation Data
 * Visualization and Web-based Dashboarding using Streamlit
 
 ## Aim and Motivation
@@ -16,6 +16,22 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 3. **Description** - A small description about the news article 
 
 ## Workflow
-1. **Data Preprocessing and Feature Extraction**
+1. **Exploratory Data Analysis(EDA)**
    - Word Tokenization and Lemmatization 
+   - Part Of Speech(POS) Tag Extraction 
+   - Adding meta features in the form of number of words and punctuations 
+   - Extracted phrases based on POS tagset features
+   - Searched for most relevant positive and negative keyword(s) based on occurences or its distribution in the dataset
+   - Caculated PMI of these tags with respect to the keywords(or phrases) and overall sematic orientation(SO) to the sentence 
    - 
+  
+2. **Classification**
+   - Applied Multinomial Naive Byes, Random Forest, ANN and LSTMs for predicting sentiments 
+   - Achieved best Macro-F1 score of 0.76 and a recall score of 0.81 
+
+3. **Deployment**
+   - Tried deploying the model using Streamlit and ngrok. 
+   - Used Streamlit for building the UI and utlized ngrok for serving the model
+
+4. **Visualization**
+
