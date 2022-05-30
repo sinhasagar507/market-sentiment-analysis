@@ -16,7 +16,7 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 3. **Description** - A small description about the news article 
 
 ## Workflow
-1. ####**Exploratory Data Analysis(EDA)**
+#### Exploratory Data Analysis(EDA)
    - Word Tokenization and Lemmatization 
    - Part Of Speech(POS) Tag Extraction 
    - Adding meta features in the form of number of words and punctuations 
@@ -32,5 +32,7 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 #### Deployment
    - Tried deploying the model using Streamlit and ngrok. 
    - Used Streamlit for building the UI and utlized ngrok for serving the model
+
+#### PMI and Semantic Orientation
 
     
