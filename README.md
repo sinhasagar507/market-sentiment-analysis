@@ -32,8 +32,10 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    - Tried deploying the model using Streamlit and ngrok. 
    - Used Streamlit for building the UI and utlized ngrok for serving the model
 
-#### PMI and Semantic Orientation
-   - ![PMI](images/so.png) 
+#### PMI 
+   - ![PMI](images/pmi.png) 
+
+#### Semantic Orientation
    - ![Semantic Orientation][images/so.png]
 
     
