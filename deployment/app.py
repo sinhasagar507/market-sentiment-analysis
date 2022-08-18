@@ -191,18 +191,12 @@ def main():
 
                
                st.write(pred_label)
-              #  if int(pred_label) == 1:
-              #     st.write("WELL, HAVE FAITH AND ALL WILL BE FINE!")
-
-              #  else:
-              #     st.write("WELL, ALL IS NOT WELL OR SEEMINGLY NEUTRAL TO TAKE A STAND")
-
+               
             if len(text) == 0:
                st.write("PLEASE ENTER SOME VALID TEXT")
             
             else:
                pass
-
 
 
       elif predchoice == 'ANN model':
@@ -244,9 +238,6 @@ def main():
       corpus = vis_data['Combined_Text']
       bow = vis_data_sorted['Combined_Text']
 
-      
-      #The code for following visualizations - mention the inspirations later
-
       #Storing important unigrams in 1-year gap
       total_data_unigram = get_imp(bow.tolist(), 5000, ngram1=1, ngram2=1)
       imp_unigrams = {}
@@ -255,7 +246,7 @@ def main():
          imp_unigrams[year] = get_imp(_bow, mf=5000, ngram1=1, ngram2=1)
 
 
-      #Storing common unigrams in 1-year gap
+      # Storing common unigrams in 1-year gap
       com_unigrams = {}
       for year in np.arange(2014, 2020, 1):
         if year == 2020:
@@ -394,39 +385,6 @@ def main():
          plt.show()
          st.pyplot()
 
-
-      # col1, col2, col3 = st.beta_columns(3)
-
-      # with col1:
-        #  st.header("Unigrams")
-        #st.bar_chart(total_data_unigram.head(20))
-        #  total_data_unigram.head(20).plot(kind='bar', figsize=(25, 10), colormap='Set1')
-        #  plt.xlabel('Unigrams')
-        #  plt.ylabel('Frequency')
-        #  plt.title('Count of Unigrams in Dataset', fontsize=20)
-        #  plt.xticks(size=20)
-        #  st.pyplot()
-
-      # with col2:
-        #  st.header("Bigrams")
-        #st.bar_chart(total_data_unigram.head(20))
-        #  total_data_bigram.head(20).plot(kind='bar', figsize=(25, 10), colormap='Set2')
-        #  plt.xlabel('Unigrams')
-        #  plt.ylabel('Frequency')
-        #  plt.title('Count of Unigrams in Dataset', fontsize=20)
-        #  plt.xticks(size=20)
-        #  st.pyplot()
-
-      # with col3:
-        #  st.header("Trigrams")
-        #st.bar_chart(total_data_unigram.head(20))
-        #  total_data_unigram.head(20).plot(kind='bar', figsize=(25, 10), colormap='Set3')
-        #  plt.xlabel('Unigrams')
-        #  plt.ylabel('Frequency')
-        #  plt.title('Count of Unigrams in Dataset', fontsize=20)
-        #  plt.xticks(size=20)
-        #  st.pyplot()
-      
 
 if __name__ == '__main__':
   main()
