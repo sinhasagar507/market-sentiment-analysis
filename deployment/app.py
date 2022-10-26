@@ -1,36 +1,30 @@
 try:
+   import re
    import pandas as pd
    import numpy as np
    import matplotlib.pyplot as plt
    import seaborn as sns
    import streamlit as st
    from wordcloud import WordCloud, STOPWORDS
+   
    import nltk   # text preprocessing
+   nltk.download('punkt')
+   nltk.download('stopwords')
+   nltk.download('wordnet')
+   nltk.download('punkt')
+   nltk.download('averaged_perceptron_tagger')
+   from nltk.stem import PorterStemmer
+   from nltk.corpus import stopwords
+   from nltk.stem import WordNetLemmatizer
+   
    import joblib # Save and load ML models 
    import keras  # Neural Network 
+   from keras.preprocessing.text import Tokenizer, one_hot 
+   from keras.preprocessing.sequence import pad_sequences 
+   from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+   
 except Exception as e: 
    print(f"You have encountered {e}") 
-
-#Install the requisite libraries
-import nltk #Text preprocessing library
-import joblib #For saving and loading ML models
-import keras #For loading saved models
-
-#Downloading the relevant libraries and dependencies in NLTK module for preprocessing
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-from nltk.stem import PorterStemmer
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
-
-#Regular Expressions
-import re
-
-#Text to numerical features - ML algorithms
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
 #Initialising the stemmer and lemmatizer
 stemmer = PorterStemmer()
@@ -42,12 +36,9 @@ vocab_size = 10000
 sent_length = 25
 embedding_vector_features = 40
 
-#Text preprocessing
-from keras.preprocessing.text import Tokenizer, one_hot
-from keras.preprocessing.sequence import pad_sequences
 
 
-#Load the saved models
+# Load the saved models
 #Loading Random Forest Classifier
 rf_classifier = joblib.load('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/finalized_ht.sav')
 #Loading Multinomial Byes Classifier
