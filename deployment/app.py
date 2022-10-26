@@ -26,39 +26,31 @@ try:
 except Exception as e: 
    print(f"You have encountered {e}") 
 
-#Initialising the stemmer and lemmatizer
+# Initialising the stemmer and lemmatizer
 stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
 
-
-#Pre-defining the vocabulary size to be 10000, sentence 
+# Pre-defining the vocabulary size to be 10000, sentence 
 vocab_size = 10000
 sent_length = 25
 embedding_vector_features = 40
 
+# Load models and vectorizer 
+rf_classifier = joblib.load("/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/finalized_ht.sav") # Loading Random Forest Classifier
+mnb_classifier = joblib.load("/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/finalized_mnb.sav")  # Loading Multinomial Byes Classifier
+ann_base_classifier = keras.models.load_model("/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/NN_basic") # Loading Keras base ANN model
+rnn_base_classifier = keras.models.load_model("/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/RNN_basic") # Loading Keras base ANN model
+tfv = joblib.load("/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/finalized_tfv.sav") # Loading the vectorizer
 
-
-# Load the saved models
-#Loading Random Forest Classifier
-rf_classifier = joblib.load('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/finalized_ht.sav')
-#Loading Multinomial Byes Classifier
-mnb_classifier = joblib.load('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/finalized_mnb.sav')
-#Loading Keras basic RNN model
-rnn_base_classifier = keras.models.load_model('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/RNN_basic')
-#Loading KeraS basic ANN model
-ann_base_classifier = keras.models.load_model('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/NN_basic')
-#Loading the vectorizer
-tfv = joblib.load('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/src/models/saved-models-vectorizer/finalized_tfv.sav')
-#Load the  dataset for performing visualizations
-
-vis_data = pd.read_csv('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/data/processed/processed_data.csv')
-vis_turney = pd.read_csv('/content/drive/MyDrive/Datasets/Indian Financial News Headlines/data/processed/turney2.csv')
-vis_data['Date'] = pd.to_datetime(vis_data['Date'], infer_datetime_format=True)
-vis_data['Year'] = vis_data['Date'].dt.year
-vis_data_sorted = vis_data.sort_values(by='Year', ascending=False)
+# Load relevant datasets for visualizations
+vis_data = pd.read_csv("/content/drive/MyDrive/Datasets/Indian Financial News Headlines/data/processed/processed_data.csv")  # Load raw datasets for visualization
+vis_turney = pd.read_csv("/content/drive/MyDrive/Datasets/Indian Financial News Headlines/data/processed/turney2.csv")  # Load Turney-labelled dataset for visualization 
+vis_data["Date"] = pd.to_datetime(vis_data["Date"], infer_datetime_format=True)
+vis_data["Year"] = vis_data['Date'].dt.year
+vis_data_sorted = vis_data.sort_values(by="Year", ascending=False)
 vis_data_sorted.drop(['Unnamed: 0'], axis=1, inplace=True)
 
-#Custom Test Prediction, for checks
+# Custom Test Prediction, for checks
 def clean_raw(text):
    new_review = str(text)
    new_review = re.sub('[^a-zA-Z]', ' ', new_review)
@@ -66,8 +58,7 @@ def clean_raw(text):
    new_review = new_review.split()
    all_stopwords = stopwords.words('english')
    new_review = [lemmatizer.lemmatize(word) for word in new_review]
-   new_review = ' '.join(new_review)
-
+   new_review = " ".join(new_review)
    return new_review
 
 def transformer_tf(classifier, text, vectorizer):
@@ -109,29 +100,23 @@ def wordcloud_generator(data):
                   random_state=42).generate(str(data['Combined_Text']))
    return wordcloud
 
-
-   
-
 PAGE_CONFIG = {"page_title":"StColab.io","page_icon":":smiley:","layout":"centered"}
-st.set_option('deprecation.showPyplotGlobalUse', False)
+st.set_option("deprecation.showPyplotGlobalUse", False)
 st.set_page_config(**PAGE_CONFIG)
 
 def main():
-
    header_text = ''' 
                   <h3 style="text-align:center; text-transform:uppercase; text-decoration:none; letter-spacing:2px;">
                   Sentiment Analysis of Financial News Headlines
                   </h3>
 
                  '''
-
    st.markdown(header_text, unsafe_allow_html=True)
-
    menu = ['Classification','Visualization']
    st.sidebar.subheader("Choose to predict or visualize")
    choice = st.sidebar.selectbox("Click the desired option", menu)
 
-   if choice == 'Classification':
+   if choice == "Classification":
 
       st.markdown('''
                   <h3 style="text-align:center; text-transform:uppercase; text-decoration:none;>
@@ -139,11 +124,11 @@ def main():
                   </h3>
                   ''')
       
-      menupred = ['Random Forest Classifier', 'Multinomial Naive Byes', 'ANN-basic', 'RNN-basic']
+      menupred = ["Random Forest Classifier", "Multinomial Naive Byes", "ANN-basic", "RNN-basic"]
       st.sidebar.subheader("Choose your classifier")
       predchoice = st.sidebar.selectbox("Click the desired option", menupred)
 
-      if predchoice == 'Random Forest Classifier':
+      if predchoice == "Random Forest Classifier":
          st.success("You have successfully selected the {} classifier".format(predchoice))
          with st.beta_container():
             text = st.text_area('Enter text', height=100)
@@ -158,7 +143,7 @@ def main():
               st.write("Please enter some valid text")
 
 
-      elif predchoice == 'Multinomial Naive Byes':
+      elif predchoice == "Multinomial Naive Byes":
          st.success("You have successfully selected the {} classifier".format(predchoice))
          with st.beta_container():
             text = st.text_area('Enter text', height=100)
@@ -172,21 +157,16 @@ def main():
             if len(text) == 0:
                 st.write("Please enter some valid text")
 
-
-
-      elif predchoice == 'Sequence Model':
+      elif predchoice == "Sequence Model":
          st.success("You have successfully selected the {} classifier".format(predchoice))
          with st.beta_container():
-            text = st.text_area('Enter text', height=100)
+            text = st.text_area("Enter text", height=100)
             button = st.button("Predict")
             classifier = rnn_base_classifier
             oh_encoded_text = transformer_oh(text)
 
             if button and len(text) != 0:
                pred_label = classifier.predict_classes(oh_encoded_text)
-
-
-               
                st.write(pred_label)
                
             if len(text) == 0:
@@ -195,8 +175,7 @@ def main():
             else:
                pass
 
-
-      elif predchoice == 'ANN model':
+      elif predchoice == "ANN model":
          st.success("You have successfully selected the {} classifier".format(predchoice))
          with st.beta_container():
             text = st.text_area('Enter text', height=100)
@@ -206,40 +185,30 @@ def main():
             
             if button and len(text) != 0:
                pred_label = classifier.predict_classes(oh_encoded_text)
-
-
-
                st.write(pred_label)
-              #  if int(pred_label[0]) == 1:
-              #     st.write("WELL, HAVE FAITH AND ALL WILL BE FINE!")
-
-              #  else:
-              #     st.write("WELL, ALL IS NOT WELL OR SEEMINGLY NEUTRAL TO TAKE A STAND")
-
+               
             if len(text) == 0:
                st.write("PLEASE ENTER SOME VALID TEXT")
             
             else:
                pass
 
-
-   elif choice == 'Visualization':
+   elif choice == "Visualization":
       st.markdown("Here are some interesting and fun visualizations we get on the processed dataset")
       st.markdown(''' 
       
-      
                   ''')
-      #Display the first 5 rows of the processed dataset
+      
+      # Display the first 5 rows of the processed dataset
+      # Extracting the corpus
+      corpus = vis_data["Combined_Text"]
+      bow = vis_data_sorted["Combined_Text"]
 
-      #Extracting the corpus
-      corpus = vis_data['Combined_Text']
-      bow = vis_data_sorted['Combined_Text']
-
-      #Storing important unigrams in 1-year gap
+      # Storing important unigrams in 1-year gap
       total_data_unigram = get_imp(bow.tolist(), 5000, ngram1=1, ngram2=1)
       imp_unigrams = {}
-      for year in vis_data_sorted['Year'].unique():
-         _bow = vis_data_sorted[vis_data_sorted['Year'] == year]['Combined_Text'].tolist()
+      for year in vis_data_sorted["Year"].unique():
+         _bow = vis_data_sorted[vis_data_sorted["Year"] == year]["Combined_Text"].tolist()
          imp_unigrams[year] = get_imp(_bow, mf=5000, ngram1=1, ngram2=1)
 
 
@@ -253,7 +222,7 @@ def main():
             com_unigrams[year] = set(imp_unigrams[year].index).intersection(set(imp_unigrams[year+1].index))
 
 
-      #Storing important bigrams in 1-year gap
+      # Storing important bigrams in 1-year gap
       total_data_bigram = get_imp(bow.tolist(), 5000, ngram1=2, ngram2=2)
       imp_bigrams = {}
       for year in vis_data_sorted['Year'].unique():
@@ -261,7 +230,7 @@ def main():
          imp_bigrams[year] = get_imp(_bow, mf=5000, ngram1=2, ngram2=2)
 
 
-      #Storing common bigrams in 1-year gap
+      # Storing common bigrams in 1-year gap
       com_bigrams = {}
       for year in np.arange(2014, 2020, 1):
          if year == 2020:
@@ -271,15 +240,14 @@ def main():
             com_bigrams[year] = set(imp_bigrams[year].index).intersection(set(imp_bigrams[year+1].index))
 
 
-      #Storing important trigrams in 1-year gap
+      # Storing important trigrams in 1-year gap
       total_data_trigram = get_imp(bow.tolist(), 5000, ngram1=3, ngram2=3)
       imp_trigrams = {}
-      for year in vis_data_sorted['Year'].unique():
-         _bow = vis_data_sorted[vis_data_sorted['Year'] == year]['Combined_Text'].tolist()
+      for year in vis_data_sorted["Year"].unique():
+         _bow = vis_data_sorted[vis_data_sorted["Year"] == year]["Combined_Text"].tolist()
          imp_trigrams[year] = get_imp(_bow, mf=5000, ngram1=3, ngram2=3)
 
-
-      #Storing common trigrams in 1-year gap
+      # Storing common trigrams in 1-year gap
       com_trigrams = {}
       for year in np.arange(2014, 2020, 1):
          if year == 2020:
@@ -311,32 +279,30 @@ def main():
                   ''')
       
 
-      
-      #Initialising the slider
-      value = st.sidebar.slider('Choose year for corresponding n-gram visualization', 
+      # Initialising the slider
+      value = st.sidebar.slider("Choose year for corresponding n-gram visualization", 
                                 min_value = 2014, max_value = 2020, value = 2015, step = 1)
 
-      st.markdown('Unigrams for {} year'.format(value))
+      st.markdown("Unigrams for {} year".format(value))
       st.bar_chart(imp_unigrams[value].head(5))
 
-      st.markdown('Bigrams for {} year'.format(value))
+      st.markdown("Bigrams for {} year".format(value))
       st.bar_chart(imp_bigrams[value].head(5))
 
-      st.markdown('Trigrams for {} year'.format(value))
+      st.markdown("Trigrams for {} year".format(value))
       st.bar_chart(imp_trigrams[value].head(5))
       
-
-      #Initialising another dropdown
+      # Initialising another dropdown
       st.markdown(
           '''
 
           ''' 
       )
-      st.title('WordCloud Visualization')
-      menu_bank = ['Hdfc','Axis', 'RBI', 'Yes']
-      value = st.sidebar.selectbox('Word Cloud Visualization', menu_bank)
+      st.title("WordCloud Visualization")
+      menu_bank = ["Hdfc", "Axis", "RBI", "Yes"]
+      value = st.sidebar.selectbox("Word Cloud Visualization", menu_bank)
 
-      if value == 'Hdfc':
+      if value == "Hdfc":
          index_hdfc = vis_data_sorted['Combined_Text'].str.match(r'(?=.*\bhdfc\b)(?=.*\bbank\b).*$', case=False)
          data_hdfc = vis_data_sorted.loc[index_hdfc]
          wordcloud = wordcloud_generator(data_hdfc)
@@ -382,6 +348,5 @@ def main():
          plt.show()
          st.pyplot()
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
   main()
