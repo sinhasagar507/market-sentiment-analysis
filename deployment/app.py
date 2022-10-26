@@ -104,12 +104,23 @@ PAGE_CONFIG = {"page_title":"StColab.io","page_icon":":smiley:","layout":"center
 st.set_option("deprecation.showPyplotGlobalUse", False)
 st.set_page_config(**PAGE_CONFIG)
 
+def graph_axes(bank_name): 
+   index_bank = vis_data_sorted["Combined_Text"].str.match(rf'(?=.*\b{bank_name}\b)(?=.*\bbank\b).*$', case=False)
+   data_bank = vis_data_sorted.loc[index_yes]
+   wordcloud = wordcloud_generator(data_yes)
+   plt.imshow(wordcloud)
+   plt.axis('off')
+   plt.xticks([])
+   plt.yticks([])
+   plt.show()
+   st.pyplot()
+   
 def main():
    header_text = ''' 
                   <h3 style="text-align:center; text-transform:uppercase; text-decoration:none; letter-spacing:2px;">
                   Sentiment Analysis of Financial News Headlines
                   </h3>
-
+                  
                  '''
    st.markdown(header_text, unsafe_allow_html=True)
    menu = ['Classification','Visualization']
@@ -131,17 +142,16 @@ def main():
       if predchoice == "Random Forest Classifier":
          st.success("You have successfully selected the {} classifier".format(predchoice))
          with st.beta_container():
-            text = st.text_area('Enter text', height=100)
+            text = st.text_area("Enter text", height=100)
             button = st.button("Predict")
             classifier = rf_classifier
             
-            if button and len(text) != 0:
+            if button and len(text)!=0:
               pred_text = transformer_tf(classifier, text, tfv)
               st.write(pred_text)
 
             if len(text) == 0:
               st.write("Please enter some valid text")
-
 
       elif predchoice == "Multinomial Naive Byes":
          st.success("You have successfully selected the {} classifier".format(predchoice))
@@ -150,11 +160,11 @@ def main():
             button = st.button("Predict")
             classifier = mnb_classifier
             
-            if button and len(text) != 0:
+            if button and len(text)!=0:
                 pred_text = transformer_tf(classifer, text, tfv)
                 st.write(pred_text)
 
-            if len(text) == 0:
+            if len(text)==0:
                 st.write("Please enter some valid text")
 
       elif predchoice == "Sequence Model":
@@ -277,8 +287,7 @@ def main():
       st.markdown('''
       
                   ''')
-      
-
+     
       # Initialising the slider
       value = st.sidebar.slider("Choose year for corresponding n-gram visualization", 
                                 min_value = 2014, max_value = 2020, value = 2015, step = 1)
@@ -301,52 +310,7 @@ def main():
       st.title("WordCloud Visualization")
       menu_bank = ["Hdfc", "Axis", "RBI", "Yes"]
       value = st.sidebar.selectbox("Word Cloud Visualization", menu_bank)
-
-      if value == "Hdfc":
-         index_hdfc = vis_data_sorted['Combined_Text'].str.match(r'(?=.*\bhdfc\b)(?=.*\bbank\b).*$', case=False)
-         data_hdfc = vis_data_sorted.loc[index_hdfc]
-         wordcloud = wordcloud_generator(data_hdfc)
-         plt.imshow(wordcloud)
-         plt.axis('off')
-         plt.xticks([])
-         plt.yticks([])
-         plt.show()
-         st.pyplot()
-
-      elif value == 'Axis':
-         index_axis = vis_data_sorted['Combined_Text'].str.match(r'(?=.*\bAxis\b)(?=.*\bbank\b).*$', case=False)
-         data_axis = vis_data_sorted.loc[index_axis]
-         wordcloud = wordcloud_generator(data_axis)
-         plt.imshow(wordcloud)
-         plt.axis('off')
-         plt.xticks([])
-         plt.yticks([])
-         plt.show()
-         st.pyplot()
-
-
-      elif value == 'RBI':
-         index_RBI = vis_data_sorted['Combined_Text'].str.match(r'.*\bRBI\b.*$', case=False)
-         data_RBI = vis_data_sorted.loc[index_RBI]
-         wordcloud = wordcloud_generator(data_RBI)
-         plt.imshow(wordcloud)
-         plt.axis('off')
-         plt.xticks([])
-         plt.yticks([])
-         plt.show()
-         st.pyplot()
-
-
-      elif value == 'Yes':
-         index_yes = vis_data_sorted['Combined_Text'].str.match(r'(?=.*\bYes\b)(?=.*\bbank\b).*$', case=False)
-         data_yes = vis_data_sorted.loc[index_yes]
-         wordcloud = wordcloud_generator(data_yes)
-         plt.imshow(wordcloud)
-         plt.axis('off')
-         plt.xticks([])
-         plt.yticks([])
-         plt.show()
-         st.pyplot()
+      graph_axes(value)
 
 if __name__ == "__main__":
   main()
