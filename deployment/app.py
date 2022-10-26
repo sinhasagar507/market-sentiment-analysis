@@ -1,9 +1,15 @@
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import streamlit as st
-from wordcloud import WordCloud, STOPWORDS
+try:
+   import pandas as pd
+   import numpy as np
+   import matplotlib.pyplot as plt
+   import seaborn as sns
+   import streamlit as st
+   from wordcloud import WordCloud, STOPWORDS
+   import nltk   # text preprocessing
+   import joblib # Save and load ML models 
+   import keras  # Neural Network 
+except Exception as e: 
+   print(f"You have encountered {e}") 
 
 #Install the requisite libraries
 import nltk #Text preprocessing library
