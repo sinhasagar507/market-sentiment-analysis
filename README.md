@@ -36,6 +36,6 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    ![PMI](images/pmi.png) 
    
 ## EDA output 
-   ![N-Gram Visualization](images/N-Grams.png) 
+   ![N-Gram Visualization](images/N-Grams.jpg) 
 
     
