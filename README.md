@@ -34,6 +34,12 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 
 #### PMI 
    ![PMI](images/pmi.png) 
+   
+## EDA output 
+   | First Header  | Second Header |
+   | ------------- | ------------- |
+   | Content Cell  | Content Cell  |
+   | Content Cell  | Content Cell  |
 
 
     
