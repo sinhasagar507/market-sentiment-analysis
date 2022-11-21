@@ -19,8 +19,7 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 #### Exploratory Data Analysis(EDA)
    - Word Tokenization and Lemmatization 
    - Part Of Speech(POS) Tag Extraction 
-   - Adding meta features in the form of number of words and punctuations 
-   - Extracted phrases based on POS tagset features
+   - Added lexical features such as word count, POS tags, etc.
    - Searched for most relevant positive and negative keyword(s) based on occurences or its distribution in the dataset
    - Caculated PMI of these tags with respect to the keywords(or phrases) and overall sematic orientation(SO) to the sentence 
  
