@@ -9,7 +9,7 @@ Sentiment Classification using Keyword-based approach and Point of Mutual Inform
 Financial news data can be helpful in numerous ways. It can be used in NLP projects to understand the overall scenario of the current market, analyse historical data and find cyclic trends, etc. With regard to Indian markets in particular, it faces a lot of highs and lows on a recurring basis. While numbers help in various statistical interpretations and are also readily available, they do not reveal the complete story. It is also important to analyse the trends through news sources and predict the overall sentiment of the market.
 
 ## Dataset(s)
-#### [News headlines from Indian financial articles](https://www.kaggle.com/datasets/hkapoor/indian-financial-news-articles-20032020)
+#### [Twitter financial news feeds]()
 The dataset contains 50K news headlines and descriptions dating back from 2003 to May 2020. It comprises three main columns:
 1. **Date** - Date of the posted news article 
 2. **Title** - Headline of news article 
