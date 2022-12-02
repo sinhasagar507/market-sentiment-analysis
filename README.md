@@ -20,7 +20,8 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    - Part Of Speech(POS) Tag Extraction 
    - Added lexical features such as word count, POS tags, etc.
    - Compiled a list of positive and negative sentiment keywords from the dataset and selected the most frequently occuring word(s)  
-   - Caculated PMI and overall sematic orientation(SO) of the sentence with respect to these keywords  
+   - Caculated PMI and overall sematic orientation(SO) of the sentence with respect to these keywords. In original Turney’s work, the no. of  hits are calculated by issuing queries to a search engine(hence the IR in PMI-IR) noting the number of hits(matching documents). The author used AltaVista engine since it has a NEAR operator. Since the search engine has deprecated, we consider our corpus as our database from which we extract frequency counts of phrases. Using regular expressions, we implemented a NEAR operator which searches for the occurrence of phrases in the vicinity of keywords.
+  
  
 #### Classification
    - Applied Multinomial Naive Byes, Random Forest, ANN and LSTMs for predicting sentiments 
