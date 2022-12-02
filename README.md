@@ -15,7 +15,7 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
 3. **Description** - A small description about the news article 
 
 ## Workflow
-#### Exploratory Data Analysis(EDA)
+#### Exploratory Data Analysis(EDA) and Feature Extraction 
    - Word Tokenization and Lemmatization 
    - Part Of Speech(POS) Tag Extraction 
    - Added lexical features such as word count, POS tags, etc.
