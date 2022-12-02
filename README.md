@@ -4,7 +4,7 @@ Sentiment Classification using Keyword-based approach and Point of Mutual Inform
 * Handling Imbalanced Dataset using Synthetic Minority Oversampling Technique(SMOTE)
 * Machine Learning Techniques for Classification on Validation Data
 
-## Aim and Motivation
+## Motivation
 Financial news data can be helpful in numerous ways. It can be used in NLP projects to understand the overall scenario of the current market, analyse historical data and find cyclic trends, etc. With regard to Indian markets in particular, it faces a lot of highs and lows on a recurring basis. While numbers help in various statistical interpretations and are also readily available, they do not reveal the complete story. It is also important to analyse the trends through news sources and predict the overall sentiment of the market.
 
 ## Dataset(s)
@@ -30,12 +30,10 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    ![PMI](images/pmi.png) 
    
 #### Limitations 
-   - Less F1-score on 0 label 
-   - Neutral Sentiment 
-   
-#### Future Scope
-   - 
-   
+   - Less weighted F1-Score on label marked "0" - Data Augmentation with older news headlines can enhance the low F1-score of the 
+   - Algorithm scalability - Deriving sentiment relies upon distance-based metrics for calculating semantic orientation, hence such a methodology is inefficient to account for larger semantic variation or large corpora 
+   - Absence of neutral sentiment - Since it is a binary classification task, demarcation between negative and neutral sentiments is not entirely addressed 
+
 ## Visualization sample output 
    ![N-Gram Visualization](images/N-Grams.jpg) 
 
