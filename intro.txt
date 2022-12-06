@@ -1,0 +1,5 @@
+This NLP project is a very innocent attempt at predicting the stock market sentiment using unsupervised learning. 
+As a dataset, Indian news headlines spanning over several years are collected. The labelling of the dataset .i.e. whether the particular 
+headline will have a positive or negative affect on the stock market has been done manually by the authors. Now, using the Turney's algo,
+authors try to estimate the semantic orientation of the news headline. The accuracy of the algorithm is calculated by comparing sentiment 
+predicted be the algorithm vs the sentiment entered manually.
