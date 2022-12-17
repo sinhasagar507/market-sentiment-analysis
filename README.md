@@ -23,18 +23,19 @@ The dataset contains 50K news headlines and descriptions dating back from 2003 t
    - Caculated PMI and overall sematic orientation(SO) of the sentence with respect to these keywords. In original Turney’s work, the no. of  hits are calculated by issuing queries to a search engine(hence the IR in PMI-IR) noting the number of hits(matching documents). The author used AltaVista engine since it has a NEAR operator. Since the search engine has deprecated, we consider our corpus as our database from which we extract frequency counts of phrases. Using regular expressions, we implemented a NEAR operator which searches for the occurrence of phrases in the vicinity of keywords.
   
  
-#### Classification
-   - Applied Multinomial Naive Byes, Random Forest, ANN and LSTMs for predicting sentiments 
+## Model 
+   - Applied Multinomial Naive Byes, Random Forest, ANN and LSTMs for binary sentiment classification 
    - Achieved best Macro-F1 score of 0.76 and a recall score of 0.81 
 
-#### PMI 
-   ![PMI](images/pmi.png) 
    
-#### Limitations 
+## Limitations 
    - Less weighted F1-Score on label marked "0" - Data Augmentation with older news headlines can enhance the low F1-score of the 
    - Algorithm scalability - Deriving sentiment relies upon distance-based metrics for calculating semantic orientation, hence such a methodology is inefficient to account for larger semantic variation or large corpora 
    - Absence of neutral sentiment - Since it is a binary classification task, demarcation between negative and neutral sentiments is not entirely addressed 
 
+#### PMI 
+   ![PMI](images/pmi.png) 
+   
 ## Visualization sample output 
    ![N-Gram Visualization](images/N-Grams.jpg) 
 
